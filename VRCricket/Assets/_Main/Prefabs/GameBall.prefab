@@ -158,16 +158,16 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.45
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.12194443
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -221,7 +221,7 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0
+  m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!114 &7038577876920608963
@@ -236,5 +236,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dbc8b62d4112047a310ece7ec89675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinThrust: 300
-  MaxThrust: 500
+  MinThrust: 5
+  MaxThrust: 7

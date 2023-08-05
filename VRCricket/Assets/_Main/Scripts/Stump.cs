@@ -19,6 +19,13 @@ public class Stump : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ball"))
+            Out();
+        
+    }
+
     // Update is called once per frame
     void Update()
     {

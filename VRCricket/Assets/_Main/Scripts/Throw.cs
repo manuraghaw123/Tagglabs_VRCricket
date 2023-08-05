@@ -13,7 +13,7 @@ public class Throw : MonoBehaviour
         i = Random.Range(MinThrust, MaxThrust);
         Debug.Log(i);
         rb = this.gameObject.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * i);
+        rb.AddForce(transform.forward * i, ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision col)

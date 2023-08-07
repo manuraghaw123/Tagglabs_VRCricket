@@ -17,9 +17,9 @@ public class Bat : MonoBehaviour {
     {
         r.MovePosition(R_Controller.transform.position);
         r.MoveRotation(R_Controller.transform.rotation);
-
-        if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
-        {
-        }
     }
+
+   
+
+
 }

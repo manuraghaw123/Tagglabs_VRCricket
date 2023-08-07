@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class BallGroundTouch : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ball")
-            Debug.Log("Ground Touch");
-
+        if(collision.gameObject.tag == "Ball")
+        {
+            if (Manager.instance.isBatTouch)
+            {
+                Manager.instance.isGroundTouch = true;
+                Debug.Log("GroumdTouch");
+            }
+        }
     }
+
+    
 }

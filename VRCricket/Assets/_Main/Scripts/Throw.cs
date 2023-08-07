@@ -20,12 +20,13 @@ public class Throw : MonoBehaviour
     {
         if(col.collider.tag == "Bat")
         {
-           // col.gameObject.GetComponent<AudioSource>().Play();
+            Debug.Log("HITBAT");
+            Manager.instance.HitBat();
         }
     }
 
     void DestroyBall()
     {
-        Destroy(this.gameObject);
+       Destroy(this.gameObject);
     }
 }

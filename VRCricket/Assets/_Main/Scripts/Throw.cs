@@ -6,7 +6,7 @@ public class Throw : MonoBehaviour
     public int MaxThrust;
     Rigidbody rb;
     int i;
-
+    public float BallMass = 1.0f;
     void Start()
     {
         Invoke("DestroyBall", 6);
@@ -14,6 +14,7 @@ public class Throw : MonoBehaviour
         Debug.Log(i);
         rb = this.gameObject.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * i, ForceMode.Impulse);
+
     }
 
     void OnCollisionEnter(Collision col)
@@ -25,6 +26,7 @@ public class Throw : MonoBehaviour
         }
     }
 
+   
     void DestroyBall()
     {
        Destroy(this.gameObject);

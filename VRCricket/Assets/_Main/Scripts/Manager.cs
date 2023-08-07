@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -22,20 +23,51 @@ public class Manager : MonoBehaviour
     AudioSource hitBatSound, clapSound;
 
     [SerializeField]
-    TextMeshPro BallsText, ScoreText, ResultText;
+    TextMeshPro BallsText, ScoreText, ResultText, overText;
 
     int totalBalls;
 
     public int totalScore;
     int oneOrtwo;
     bool isOneOrTwoCalculated;
+    int ballSpawned;
+    int overs;
+    float resetTimer = 3;
 
     private void Awake()
     {
         instance = this;
     }
 
-     void DoBowling()
+    [SerializeField]
+    TextMeshPro nameText;
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("Overs"))
+        {
+            totalBalls = PlayerPrefs.GetInt("Overs") * 6;
+          
+        }
+        else
+        {
+            totalBalls = 18;
+        }
+
+        if (PlayerPrefs.HasKey("Name"))
+        {
+            nameText.text = PlayerPrefs.GetString("Name");
+        }
+        else
+        {
+            nameText.text = "Player";
+        }
+
+        BallsText.text = "Balls Remaining : " + totalBalls.ToString();
+        overText.text = "OVERS : " + overs.ToString();
+    }
+
+    void DoBowling()
     {
         bowlerAnimator.ResetTrigger("idle");
         bowlerAnimator.SetTrigger("bowling");
@@ -46,10 +78,9 @@ public class Manager : MonoBehaviour
     void SpawnBall()
     {
         ballSpawner.SpawnBall();
+        ballSpawned++;
         Invoke("BowlerIdle", 1f);
         Invoke("EnableBowlingTrigger", bowlingTriggertime);
-        totalBalls++;
-        BallsText.text = totalBalls.ToString();
     }
 
     void BowlerIdle()
@@ -66,13 +97,32 @@ public class Manager : MonoBehaviour
 
     void EnableBowlingTrigger()
     {
-        isBatTouch = false;
-        isGroundTouch = false;
-        isOneOrTwoCalculated = false;
-        bowlingTrigerObject.SetActive(true);
-        wicketStump.ResetWicket();
-        ShowScore();
-        ResultText.text = " ";
+        if (ballSpawned % 6 == 0)
+        {
+            overs++;
+            overText.text = "OVERS : " + overs.ToString();
+        }
+        totalBalls--;
+        BallsText.text = "Balls Remaining : " + totalBalls.ToString();
+
+        if (totalBalls == 0)
+        {
+            ShowResult("Thank You!");
+        }
+        else
+        {
+
+            isBatTouch = false;
+            isGroundTouch = false;
+            isOneOrTwoCalculated = false;
+            bowlingTrigerObject.SetActive(true);
+            wicketStump.ResetWicket();
+            ShowScore();
+            ResultText.text = " ";
+
+        }
+
+
     }
 
     public void HitBat()
@@ -130,6 +180,27 @@ public class Manager : MonoBehaviour
     {
         ResultText.text = resultText;
     }
+
+    private void Update()
+    {
+        if (OVRInput.Get(OVRInput.Button.One))
+        {
+            resetTimer -= Time.deltaTime;
+
+            if (resetTimer < 0)
+            {
+                SceneManager.LoadScene(0);
+            }
+
+        }
+
+        if (OVRInput.GetUp(OVRInput.Button.One))
+        {
+            resetTimer = 3;
+        }
+    }
+
+
 
 
 

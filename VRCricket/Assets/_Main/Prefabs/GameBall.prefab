@@ -238,3 +238,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinThrust: 5
   MaxThrust: 13
+  BallMass: 1

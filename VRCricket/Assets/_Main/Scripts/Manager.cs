@@ -173,7 +173,15 @@ public class Manager : MonoBehaviour
 
     void ShowScore()
     {
-        ScoreText.text = totalScore.ToString();
+        if (totalScore < 10)
+        {
+            ScoreText.text = "0"+totalScore.ToString();
+        }
+        else
+        {
+            ScoreText.text = totalScore.ToString();
+        }
+       
     }
 
     void ShowResult(string resultText)

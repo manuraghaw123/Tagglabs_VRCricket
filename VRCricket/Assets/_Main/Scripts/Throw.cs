@@ -20,7 +20,7 @@ public class Throw : MonoBehaviour
     {
         if(col.collider.tag == "Bat")
         {
-            col.gameObject.GetComponent<AudioSource>().Play();
+           // col.gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

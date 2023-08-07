@@ -29,19 +29,11 @@ public class Stump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Out();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetWicket();
-        }
+      
 
     }
 
-    private void ResetWicket()
+   public void ResetWicket()
     {
         for (int i = 0; i < stumpTransforms.Length; i++)
         {

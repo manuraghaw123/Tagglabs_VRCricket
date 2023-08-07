@@ -9,4 +9,11 @@ public class BowlingTrigger : MonoBehaviour
         if (other.CompareTag("Bat"))
             Manager.instance.BowlingTrigger();
     }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+            Manager.instance.BowlingTrigger();
+
+    }
 }

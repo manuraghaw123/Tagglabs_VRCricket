@@ -13,9 +13,10 @@ public class Manager : MonoBehaviour
     float bowlingTriggertime;
     [SerializeField]
     GameObject bowlingTrigerObject;
-
     [SerializeField]
     Stump wicketStump;
+
+    public bool isBatTouch, isGroundTouch;
 
     private void Awake()
     {
@@ -51,6 +52,8 @@ public class Manager : MonoBehaviour
 
     void EnableBowlingTrigger()
     {
+        isBatTouch = false;
+        isGroundTouch = false;
         bowlingTrigerObject.SetActive(true);
         wicketStump.ResetWicket();
     }

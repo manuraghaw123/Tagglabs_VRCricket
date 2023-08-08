@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class Manager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Manager : MonoBehaviour
     int ballSpawned;
     int overs;
     float resetTimer = 3;
+
+    string filePath;
 
     private void Awake()
     {
@@ -108,6 +111,7 @@ public class Manager : MonoBehaviour
         if (totalBalls == 0)
         {
             ShowResult("Thank You!");
+            UpdateUserData();
         }
         else
         {
@@ -206,6 +210,27 @@ public class Manager : MonoBehaviour
         {
             resetTimer = 3;
         }
+    }
+
+    public void UpdateUserData()
+    {
+        string Filename = "UserData_" + System.DateTime.Now.ToString("MM-dd-yyyy") + ".csv";
+
+        string dir = Application.persistentDataPath + "/data/";
+        filePath = Application.persistentDataPath + "/data/" + Filename;
+
+        if (!Directory.Exists(dir))
+        {
+            Directory.CreateDirectory(dir);
+
+        }
+        if (!File.Exists(filePath))
+        {
+            File.Create(filePath).Dispose();
+        }
+
+        var newLine = string.Format("{0},{1}", PlayerPrefs.GetString("Name"), totalScore.ToString());
+        File.AppendAllText(filePath, newLine + "\n");
     }
 
 
